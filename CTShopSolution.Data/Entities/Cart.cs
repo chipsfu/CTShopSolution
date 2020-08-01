@@ -15,6 +15,7 @@ namespace CTShopSolution.Data.Entities
 
         public DateTime DateCreated { get; set; }
 
-        //public AppUser AppUser { get; set; }
+        //khi tao app user thi phai tro den khoa ngoai
+        public AppUser AppUser { get; set; }
     }
 }

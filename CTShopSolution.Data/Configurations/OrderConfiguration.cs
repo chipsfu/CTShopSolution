@@ -13,6 +13,7 @@ namespace CTShopSolution.Data.Configurations
             // so it thi khong can cau hinh, sang order detail cau hinh
 
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(50);
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         }
     }
 }

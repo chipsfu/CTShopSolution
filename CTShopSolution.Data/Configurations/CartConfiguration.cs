@@ -16,6 +16,10 @@ namespace CTShopSolution.Data.Configurations
 
             builder.HasOne(x => x.Product).WithMany(x => x.Carts).HasForeignKey(x => x.ProductId);
 
+            //sau khi them appuser vqao cart
+            //AppUser cung chua co thuoc tinh nen phai them vao AppUser List<cart>
+            builder.HasOne(x => x.AppUser).WithMany(x => x.Carts).HasForeignKey(x => x.UserId);
+
         }
     }
 }

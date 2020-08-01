@@ -4,14 +4,16 @@ using CTShopSolution.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CTShopSolution.Data.Migrations
 {
     [DbContext(typeof(CtShopDbContext))]
-    partial class CtShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200801092946_AspNetCoreIdentityDatabase")]
+    partial class AspNetCoreIdentityDatabase
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -73,16 +75,6 @@ namespace CTShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("a6402391-4220-4df2-948a-b17b13f0af65"),
-                            ConcurrencyStamp = "128daf44-80be-4c28-a0ba-0867bf2cf431",
-                            Description = "Administrator role",
-                            Name = "admin",
-                            NormalizedName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("CTShopSolution.Data.Entities.AppUser", b =>
@@ -149,27 +141,6 @@ namespace CTShopSolution.Data.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("AppUsers");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("58fc3808-5242-4133-95fb-23781d0465ef"),
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4d6438a2-9fc6-41a9-8547-43bc26876c1b",
-                            Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            Email = "thanhyen0710@gmail.com",
-                            EmailConfirmed = true,
-                            FirstName = "Yen",
-                            LastName = "Dang",
-                            LockoutEnabled = false,
-                            NormalizedEmail = "thanhyen0710@gmail.com",
-                            NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEF+Clw6pAyFth++0ZFd62dw9tSzf+KNItpupImdBThgeg25lZjl5TPdoqmQliCksAQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "",
-                            TwoFactorEnabled = false,
-                            UserName = "admin"
-                        });
                 });
 
             modelBuilder.Entity("CTShopSolution.Data.Entities.Cart", b =>
@@ -497,7 +468,7 @@ namespace CTShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2020, 8, 1, 16, 40, 34, 210, DateTimeKind.Local).AddTicks(27),
+                            DateCreated = new DateTime(2020, 8, 1, 16, 29, 46, 372, DateTimeKind.Local).AddTicks(808),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,
@@ -761,13 +732,6 @@ namespace CTShopSolution.Data.Migrations
                     b.HasKey("UserId", "RoleId");
 
                     b.ToTable("AppUserRoles");
-
-                    b.HasData(
-                        new
-                        {
-                            UserId = new Guid("58fc3808-5242-4133-95fb-23781d0465ef"),
-                            RoleId = new Guid("a6402391-4220-4df2-948a-b17b13f0af65")
-                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<System.Guid>", b =>

@@ -1,5 +1,6 @@
 ﻿using CTShopSolution.Data.Entities;
 using CTShopSolution.Data.Entities.Enum;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -119,7 +120,42 @@ namespace CTShopSolution.Data.Extensions
             modelBuilder.Entity<ProductInCategory>().HasData(
                 new ProductInCategory() { ProductId = 1, CategoryId = 1 }
             );
+
+            // any guid
+            var roleId = new Guid("A6402391-4220-4DF2-948A-B17B13F0AF65");
+
+            var adminId = new Guid("58FC3808-5242-4133-95FB-23781D0465EF");
+            modelBuilder.Entity<AppRole>().HasData(new AppRole
+            {
+                Id = roleId,
+                Name = "admin",
+                NormalizedName = "admin",
+                Description = "Administrator role"
+            });
+
+            var hasher = new PasswordHasher<AppUser>();
+            modelBuilder.Entity<AppUser>().HasData(new AppUser
+            {
+                Id = adminId,
+                UserName = "admin",
+                NormalizedUserName = "admin",
+                Email = "thanhyen0710@gmail.com",
+                NormalizedEmail = "thanhyen0710@gmail.com",
+                EmailConfirmed = true,
+                PasswordHash = hasher.HashPassword(null, "123456a@?"),
+                SecurityStamp = string.Empty,
+                FirstName = "Yen",
+                LastName = "Dang",
+                Dob = new DateTime(2020, 01, 31)
+            });
+
+            modelBuilder.Entity<IdentityUserRole<Guid>>().HasData(new IdentityUserRole<Guid>
+            {
+                RoleId = roleId,
+                UserId = adminId
+            });
         }
     }
 }
+
 
