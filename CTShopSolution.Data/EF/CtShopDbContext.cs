@@ -1,5 +1,6 @@
 ﻿using CTShopSolution.Data.Configurations;
 using CTShopSolution.Data.Entities;
+using CTShopSolution.Data.Extensions;
 using Microsoft.EntityFrameworkCore;
 
 namespace CTShopSolution.Data.EF
@@ -30,6 +31,9 @@ namespace CTShopSolution.Data.EF
             modelBuilder.ApplyConfiguration(new PromotionConfiguration());
             modelBuilder.ApplyConfiguration(new TransactionConfiguration());
 
+
+            //Data seeding
+            modelBuilder.Seed();
 
 
 
