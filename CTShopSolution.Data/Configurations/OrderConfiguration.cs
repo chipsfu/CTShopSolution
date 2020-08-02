@@ -11,7 +11,12 @@ namespace CTShopSolution.Data.Configurations
             builder.ToTable("Orders"); //Ten bang phai la so nhieu
             builder.HasKey(x => x.Id);
             // so it thi khong can cau hinh, sang order detail cau hinh
+            builder.Property(x => x.Id).UseIdentityColumn();
 
+            builder.Property(x => x.OrderDate);
+            builder.Property(x => x.ShipAddress).IsRequired().HasMaxLength(250);
+            builder.Property(x => x.ShipName).IsRequired().HasMaxLength(250);
+            builder.Property(x => x.ShipPhoneNumber).HasMaxLength(250);
             builder.Property(x => x.ShipEmail).IsRequired().IsUnicode(false).HasMaxLength(50);
             builder.HasOne(x => x.AppUser).WithMany(x => x.Orders).HasForeignKey(x => x.UserId);
         }

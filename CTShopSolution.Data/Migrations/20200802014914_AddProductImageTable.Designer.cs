@@ -4,14 +4,16 @@ using CTShopSolution.Data.EF;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CTShopSolution.Data.Migrations
 {
     [DbContext(typeof(CtShopDbContext))]
-    partial class CtShopDbContextModelSnapshot : ModelSnapshot
+    [Migration("20200802014914_AddProductImageTable")]
+    partial class AddProductImageTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,7 +80,7 @@ namespace CTShopSolution.Data.Migrations
                         new
                         {
                             Id = new Guid("a6402391-4220-4df2-948a-b17b13f0af65"),
-                            ConcurrencyStamp = "73f934ab-3f9c-4256-8bda-ac4eafc781c7",
+                            ConcurrencyStamp = "7c8780d5-2824-40b8-bee6-b484398ac93e",
                             Description = "Administrator role",
                             Name = "admin",
                             NormalizedName = "admin"
@@ -155,7 +157,7 @@ namespace CTShopSolution.Data.Migrations
                         {
                             Id = new Guid("58fc3808-5242-4133-95fb-23781d0465ef"),
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "6e59b6bc-432f-4d0d-a0cf-355f949e0da6",
+                            ConcurrencyStamp = "a282b7e8-4b7e-4fb4-9f1e-28c012b663e7",
                             Dob = new DateTime(2020, 1, 31, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             Email = "thanhyen0710@gmail.com",
                             EmailConfirmed = true,
@@ -164,7 +166,7 @@ namespace CTShopSolution.Data.Migrations
                             LockoutEnabled = false,
                             NormalizedEmail = "thanhyen0710@gmail.com",
                             NormalizedUserName = "admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJhZp5WJKPqT7eTFZgXeRiVdIzJdd2MVBGtRyPKAH6KRHmOvh2u/ed0uVbJrOQq2YQ==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEDAxvdzcdizBChxzoSWcwI5eimMapjf5F55wzj5ySpXU5mR5DDBRVKZO5+55PY6+hw==",
                             PhoneNumberConfirmed = false,
                             SecurityStamp = "",
                             TwoFactorEnabled = false,
@@ -475,8 +477,6 @@ namespace CTShopSolution.Data.Migrations
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
-                        .HasAnnotation("SqlServer:IdentityIncrement", 1)
-                        .HasAnnotation("SqlServer:IdentitySeed", 1)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateCreated")
@@ -506,7 +506,7 @@ namespace CTShopSolution.Data.Migrations
                         new
                         {
                             Id = 1,
-                            DateCreated = new DateTime(2020, 8, 2, 9, 56, 15, 635, DateTimeKind.Local).AddTicks(6449),
+                            DateCreated = new DateTime(2020, 8, 2, 8, 49, 14, 429, DateTimeKind.Local).AddTicks(4294),
                             OriginalPrice = 100000m,
                             Price = 200000m,
                             Stock = 0,

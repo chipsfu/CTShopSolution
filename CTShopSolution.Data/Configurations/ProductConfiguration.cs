@@ -14,6 +14,7 @@ namespace CTShopSolution.Data.Configurations
             //cau hinh ten bang, thuoc tinh
             builder.ToTable("Products");
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.Id).UseIdentityColumn();
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.OriginalPrice).IsRequired();
             builder.Property(x => x.Stock).IsRequired().HasDefaultValue(0);

@@ -12,9 +12,9 @@ namespace CTShopSolution.Data.Configurations
         public void Configure(EntityTypeBuilder<ProductInCategory> builder)
         {
             // cau hinh khoa ngoai
-            builder.HasKey(t => new {t.CategoryId, t.ProductId});
+            
             builder.ToTable("ProductInCategories");
-
+            builder.HasKey(t => new { t.CategoryId, t.ProductId });
             //Cau hinh khoa nhieu nhieu many to many
             // lien ket tu product toi nhieu category
             //Tro 2 khoa den product, category

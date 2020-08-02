@@ -8,5 +8,6 @@
 --Microsoft.EntityFrameworkCore.Design
 -Microsoft.Extensions.Configuration.Json
 -Microsoft.Extensions.Configuration.FileExtensions
+-Microsoft.AspNetCore.Hosting
 ## Config and run
 ##
