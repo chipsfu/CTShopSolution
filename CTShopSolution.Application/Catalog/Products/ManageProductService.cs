@@ -13,7 +13,6 @@ using CTShopSolution.ViewModels.Catalog.Products;
 
 using CTShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
-using CTShopSolution.ViewModels.Catalog.Products.Manage;
 
 namespace CTShopSolution.Application.Catalog.Products
 {
@@ -148,7 +147,7 @@ namespace CTShopSolution.Application.Catalog.Products
         }
 
 
-        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllPaging(GetManageProductPagingRequest request)
         {
             //JOIN
             var query = from p in _context.Products

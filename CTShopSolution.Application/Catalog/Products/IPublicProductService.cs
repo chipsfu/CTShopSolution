@@ -1,7 +1,6 @@
 ﻿
 using System.Threading.Tasks;
 using CTShopSolution.ViewModels.Catalog.Products;
-using CTShopSolution.ViewModels.Catalog.Products.Public;
 using CTShopSolution.ViewModels.Common;
 
 namespace CTShopSolution.Application.Catalog.Products

@@ -1,6 +1,6 @@
 ﻿using CTShopSolution.ViewModels.Common;
 
-namespace CTShopSolution.ViewModels.Catalog.Products.Public
+namespace CTShopSolution.ViewModels.Catalog.Products
 {
     public class GetPublicProductPagingRequest : PagingRequestBase
     {

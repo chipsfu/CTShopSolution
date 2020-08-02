@@ -6,7 +6,6 @@ using System;
 
 using System.Linq;
 using System.Threading.Tasks;
-using CTShopSolution.ViewModels.Catalog.Products.Public;
 
 namespace CTShopSolution.Application.Catalog.Products
 {

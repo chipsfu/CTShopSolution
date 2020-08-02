@@ -1,6 +1,5 @@
 ﻿
 using CTShopSolution.ViewModels.Catalog.Products;
-using CTShopSolution.ViewModels.Catalog.Products.Manage;
 using CTShopSolution.ViewModels.Common;
 using Microsoft.AspNetCore.Http;
 using System.Collections.Generic;
@@ -25,7 +24,7 @@ namespace CTShopSolution.Application.Catalog.Products
         //lay danh sach product muon hien thi
         //Task<List<ProductViewModel>>  GetAll();
 
-        Task<PagedResult<ProductViewModel>>  GetAllPaging(GetProductPagingRequest request);
+        Task<PagedResult<ProductViewModel>>  GetAllPaging(GetManageProductPagingRequest request);
 
         Task<int> AddImages(int productId, List<IFormFile> files);
         Task<int> RemoveImages(int imageId);
