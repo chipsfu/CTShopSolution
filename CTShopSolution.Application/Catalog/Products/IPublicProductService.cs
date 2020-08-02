@@ -1,4 +1,5 @@
 ﻿
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CTShopSolution.ViewModels.Catalog.Products;
 using CTShopSolution.ViewModels.Common;
@@ -10,5 +11,7 @@ namespace CTShopSolution.Application.Catalog.Products
     public interface IPublicProductService
    {
        Task<PagedResult<ProductViewModel>> GetAllByCategoryById(GetPublicProductPagingRequest request);
+
+       Task<List<ProductViewModel>> GetAll();
    }
 }
