@@ -18,4 +18,8 @@
     <ProjectReference Include="..\CTShopSolution.ViewModels\CTShopSolution.ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\user-content\" />
+  </ItemGroup>
+
 </Project>

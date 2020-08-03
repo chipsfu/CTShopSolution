@@ -10,8 +10,7 @@ namespace CTShopSolution.Application.Catalog.Products
     // Interface nay chuyen chua phuong thuc cho ben ngoai, nguoi dung
     public interface IPublicProductService
    {
-       Task<PagedResult<ProductViewModel>> GetAllByCategoryById(GetPublicProductPagingRequest request);
+       Task<PagedResult<ProductViewModel>> GetAllByCategoryById(string languageId, GetPublicProductPagingRequest request);
 
-       Task<List<ProductViewModel>> GetAll();
    }
 }
