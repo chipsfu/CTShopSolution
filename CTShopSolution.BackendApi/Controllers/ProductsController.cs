@@ -3,9 +3,11 @@ using CTShopSolution.ViewModels.Catalog.Products;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using CTShopSolution.Application.Catalog.ProductImages;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CTShopSolution.BackendApi.Controllers
 {
+    [Authorize]
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
@@ -26,6 +28,15 @@ namespace CTShopSolution.BackendApi.Controllers
         //}
 
 
+        // public-paging/
+        // api/products?pageIndex=1&pageSize=10&CategoryId=
+        [HttpGet("{languageId}")]
+        public async Task<IActionResult> GetAllPaging(string languageId, [FromQuery] GetPublicProductPagingRequest request) //mot param attribute chi dinh map tu dau tu query
+        {
+            var product = await _publicProductService.GetAllByCategoryId(languageId, request);
+            return Ok(product);
+        }
+
         //GET api/products/id
         [HttpGet("{productId}/{languageId}")]
         public async Task<IActionResult> GetById(int productId, string languageId)
@@ -33,16 +44,6 @@ namespace CTShopSolution.BackendApi.Controllers
             var product = await _manageProductService.GetById(productId, languageId);
             if (product == null)
                 return BadRequest("Cannot find product");
-            return Ok(product);
-        }
-
-
-        // public-paging/
-        // api/products?pageIndex=1&pageSize=10&CategoryId=
-        [HttpGet("{languageId}")]
-        public async Task<IActionResult> GetAllPaging(string languageId, [FromQuery]GetPublicProductPagingRequest request) //mot param attribute chi dinh map tu dau tu query
-        {
-            var product = await _publicProductService.GetAllByCategoryById(languageId, request);
             return Ok(product);
         }
 

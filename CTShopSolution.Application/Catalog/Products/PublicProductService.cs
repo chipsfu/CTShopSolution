@@ -2,7 +2,6 @@
 using CTShopSolution.ViewModels.Catalog.Products;
 using CTShopSolution.ViewModels.Common;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -50,51 +49,49 @@ namespace CTShopSolution.Application.Catalog.Products
 
         ////}
 
-        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryById(string languageId, GetPublicProductPagingRequest request)
+        public async Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request)
         {
-            //1. Query
+            //1. Select join
             var query = from p in _context.Products
                         join pt in _context.ProductTranslations on p.Id equals pt.ProductId
-                        join pic in _context.ProductInCategories on pt.ProductId equals pic.ProductId
-                        join c in _context.Categories on pic.ProductId equals c.Id
-                        // select where languageId
-                        where pt.LanguageId == request.LanguageId
-                        select new  {p, pt, pic};
+                        join pic in _context.ProductInCategories on p.Id equals pic.ProductId
+                        join c in _context.Categories on pic.CategoryId equals c.Id
+                        where pt.LanguageId == languageId
+                        select new { p, pt, pic };
+            //2. filter
             if (request.CategoryId.HasValue && request.CategoryId.Value > 0)
             {
-                query = query.Where(p => request.CategoryId == p.pic.CategoryId);
+                query = query.Where(p => p.pic.CategoryId == request.CategoryId);
             }
-            //3.paging lay ra tong so dong de phan trang
+            //3. Paging
             int totalRow = await query.CountAsync();
 
-            var data = await query.Skip((request.PageIndex-1) * request.PageSize)
+            var data = await query.Skip((request.PageIndex - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .Select(x => new ProductViewModel()
                 {
                     Id = x.p.Id,
                     Name = x.pt.Name,
                     DateCreated = x.p.DateCreated,
-                    Price = x.p.Price,
-                    OriginalPrice = x.p.OriginalPrice,
-                    Stock = x.p.Stock,
-
                     Description = x.pt.Description,
                     Details = x.pt.Details,
                     LanguageId = x.pt.LanguageId,
+                    OriginalPrice = x.p.OriginalPrice,
+                    Price = x.p.Price,
                     SeoAlias = x.pt.SeoAlias,
+                    SeoDescription = x.pt.SeoDescription,
                     SeoTitle = x.pt.SeoTitle,
-                    SeoDescription = x.pt.SeoDescription
-
+                    Stock = x.p.Stock,
+                    ViewCount = x.p.ViewCount
                 }).ToListAsync();
+
             //4. Select and projection
-            var pageResult = new PagedResult<ProductViewModel>()
+            var pagedResult = new PagedResult<ProductViewModel>()
             {
                 TotalRecord = totalRow,
-                Items = data,
-
+                Items = data
             };
-            return pageResult;
+            return pagedResult;
         }
-
     }
 }
