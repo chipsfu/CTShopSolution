@@ -64,8 +64,8 @@ namespace CTShopSolution.BackendApi
             //services.AddTransient<IValidator<LoginRequest>, LoginRequestValidator>();
             //services.AddTransient<IValidator<RegisterRequest>, RegisterRequestValidator>();
             //services.AddControllersWithViews();
-            services.AddControllers().AddFluentValidation(
-                fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()
+            services.AddControllers()
+                .AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>()
                 //fv => fv.RegisterValidatorsFromAssemblyContaining<RegisterRequestValidator>()
                 );
 
