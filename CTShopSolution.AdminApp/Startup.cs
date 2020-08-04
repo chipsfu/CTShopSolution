@@ -1,13 +1,13 @@
 using CTShopSolution.AdminApp.Services;
 using CTShopSolution.ViewModels.System.Users;
 using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
-using Microsoft.AspNetCore.Authentication.Cookies;
 
 
 namespace CTShopSolution.AdminApp
@@ -37,6 +37,11 @@ namespace CTShopSolution.AdminApp
 
 
             services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<LoginRequestValidator>());
+            //add session
+            services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+            });
 
             services.AddTransient<IUserApiClient, UserApiClient>();
 
@@ -71,6 +76,8 @@ namespace CTShopSolution.AdminApp
             app.UseRouting();
 
             app.UseAuthorization();
+            //Add session goi truoc mvc
+            app.UseSession();
 
             app.UseEndpoints(endpoints =>
             {

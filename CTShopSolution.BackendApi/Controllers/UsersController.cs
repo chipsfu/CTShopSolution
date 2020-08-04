@@ -32,7 +32,7 @@ namespace CTShopSolution.BackendApi.Controllers
         }
 
 
-        [HttpPost("register")]
+        [HttpPost]
         [AllowAnonymous]
         public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
@@ -43,6 +43,15 @@ namespace CTShopSolution.BackendApi.Controllers
             if (!result)
                 return BadRequest("Register unsuccessful!");
             return Ok();
+        }
+
+        //api/users/paging?pageIndex=1&pageSize=10&keyword=
+        [HttpGet("paging")]
+        public async Task<IActionResult> GetAllPaging([FromQuery] GetUserPagingRequest request) //mot param attribute chi dinh map tu dau tu query
+        {
+
+            var userPaging = await _userService.GetUserPaging(request);
+            return Ok(userPaging);
         }
     }
 }

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace CTShopSolution.Application.Catalog.Products
 {
-    public interface IManageProductService
+    public interface IProductService
    {
        //Interface cho admin them sua xoa
        Task<int> Create(ProductCreateRequest request);
@@ -35,6 +35,8 @@ namespace CTShopSolution.Application.Catalog.Products
 
         Task<ProductImageViewModel> GetImageById(int imageId);
 
+        Task<PagedResult<ProductViewModel>> GetAllByCategoryId(string languageId, GetPublicProductPagingRequest request);
 
-   }
+
+    }
 }

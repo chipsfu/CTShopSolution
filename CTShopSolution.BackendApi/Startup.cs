@@ -45,8 +45,7 @@ namespace CTShopSolution.BackendApi
             //
             //Addtransient moi mot lan request se tao moi voi IPublicProductService thi khoi tao PublicProductService
             //Khi Product controler dc khoi tao thi se goi contractor >> yeu cau doi tuong I PUBlic
-            services.AddTransient<IPublicProductService, PublicProductService>();
-            services.AddTransient<IManageProductService, ManageProductService>();
+            services.AddTransient<IProductService, ProductService>();
             services.AddTransient<IStorageService, FileStorageService>();
 
            
