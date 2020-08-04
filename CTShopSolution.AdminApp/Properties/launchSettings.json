@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:51973",
-      "sslPort": 44386
+      "applicationUrl": "http://localhost:53086",
+      "sslPort": 44397
     }
   },
   "profiles": {
@@ -15,14 +15,13 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "CTShopSolution.BackendApi": {
+    "CTShopSolution.AdminApp": {
       "commandName": "Project",
-      "launchBrowser": false,
-      "launchUrl": "swagger",
+      "launchBrowser": true,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "applicationUrl": "https://localhost:5001"
+      "applicationUrl": "https://localhost:5002"
     },
     "Docker": {
       "commandName": "Docker",

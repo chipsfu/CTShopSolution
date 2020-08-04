@@ -20,7 +20,7 @@ namespace CTShopSolution.BackendApi.Controllers
 
         [HttpPost("auth")]
         [AllowAnonymous]
-        public async Task<IActionResult> Auth([FromForm] LoginRequest request)
+        public async Task<IActionResult> Auth([FromBody] LoginRequest request) //FormForm post kem file Content "Multipart/form-data"
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);
@@ -28,13 +28,13 @@ namespace CTShopSolution.BackendApi.Controllers
             var resultToken = await _userService.Authenticate(request);
             if (string.IsNullOrEmpty(resultToken))
                 return BadRequest("Username or password is incorrect.");
-            return Ok(new {token = resultToken});
+            return Ok(resultToken);
         }
 
 
         [HttpPost("register")]
         [AllowAnonymous]
-        public async Task<IActionResult> Register([FromForm] RegisterRequest request)
+        public async Task<IActionResult> Register([FromBody] RegisterRequest request)
         {
             if (!ModelState.IsValid)
                 return BadRequest(ModelState);

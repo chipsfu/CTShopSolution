@@ -1,10 +1,10 @@
-﻿using CTShopSolution.BackendApi.Models;
+﻿using CTShopSolution.AdminApp.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Diagnostics;
 
-namespace CTShopSolution.BackendApi.Controllers
+namespace CTShopSolution.AdminApp.Controllers
 {
     [Authorize]
     public class HomeController : Controller
@@ -18,7 +18,6 @@ namespace CTShopSolution.BackendApi.Controllers
 
         public IActionResult Index()
         {
-            var user = User.Identity.Name;
             return View();
         }
 
