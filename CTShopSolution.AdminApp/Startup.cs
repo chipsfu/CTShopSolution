@@ -31,7 +31,7 @@ namespace CTShopSolution.AdminApp
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                 .AddCookie(options =>
             {
-                options.LoginPath = "/User/Login";
+                options.LoginPath = "/User/Index";
                 options.AccessDeniedPath = "/User/Forbidden";
             });
 
