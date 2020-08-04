@@ -83,7 +83,7 @@ namespace CTShopSolution.Application.System.Users
                    LastName = x.LastName,
                    Email = x.Email,
                    PhoneNumber = x.PhoneNumber,
-                   
+                   Dob = x.Dob
 
                 }).ToListAsync();
 

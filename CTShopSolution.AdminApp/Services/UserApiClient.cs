@@ -1,15 +1,12 @@
-﻿using CTShopSolution.ViewModels.System.Users;
+﻿using CTShopSolution.ViewModels.Common;
+using CTShopSolution.ViewModels.System.Users;
+using Microsoft.Extensions.Configuration;
+using Newtonsoft.Json;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Threading.Tasks;
-using Newtonsoft.Json;
-using CTShopSolution.ViewModels.Common;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging.EventSource;
 
 namespace CTShopSolution.AdminApp.Services
 {
@@ -46,6 +43,18 @@ namespace CTShopSolution.AdminApp.Services
             var body = await response.Content.ReadAsStringAsync();
             var user = JsonConvert.DeserializeObject<PagedResult<UserViewModel>>(body);
             return user;
+        }
+
+        public async Task<bool> RegisterUser(RegisterRequest request)
+        {
+            var client = _httpClientFactory.CreateClient();
+            client.BaseAddress = new Uri(_configuration["BaseAddress"]);
+            var json = JsonConvert.SerializeObject(request);
+            var httpContent = new StringContent(json, Encoding.UTF8, "application/json");
+
+            var response = await client.PostAsync($"/api/users", httpContent);
+          
+            return response.IsSuccessStatusCode;
         }
     }
 }
