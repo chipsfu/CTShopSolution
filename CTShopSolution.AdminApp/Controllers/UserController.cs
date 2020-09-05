@@ -5,12 +5,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
-using Microsoft.IdentityModel.Logging;
-using Microsoft.IdentityModel.Tokens;
 using System;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace CTShopSolution.AdminApp.Controllers
@@ -34,7 +29,6 @@ namespace CTShopSolution.AdminApp.Controllers
 
             var request = new GetUserPagingRequest()
             {
-                BearerToken = sessions,
                 Keyword = keyword,
                 PageIndex = pageIndex,
                 PageSize = pageSize
@@ -46,10 +40,18 @@ namespace CTShopSolution.AdminApp.Controllers
             //    ViewBag.SuccessMsg = TempData["result"];
             //}
             // View(data.ResultObj);
-            return View(data);
+            return View(data.ResultObj);
         }
 
-        
+
+
+        [HttpGet]
+        public async Task<IActionResult> Details(Guid id)
+        {
+            var result = await _userApiClient.GetById(id);
+            return View(result.ResultObj);
+        }
+
 
         [HttpGet]
         public async Task<IActionResult> Create()
@@ -64,7 +66,7 @@ namespace CTShopSolution.AdminApp.Controllers
             if (!ModelState.IsValid)
                 return View();
             var result = await _userApiClient.RegisterUser(request);
-            if (result)
+            if (result.IsSuccessed)
                 return RedirectToAction("Index");
             return View(request);
         }
