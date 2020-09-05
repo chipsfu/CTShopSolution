@@ -2,6 +2,7 @@
 using CTShopSolution.ViewModels.System.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System;
 using System.Threading.Tasks;
 
 namespace CTShopSolution.BackendApi.Controllers
@@ -26,7 +27,7 @@ namespace CTShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
 
             var resultToken = await _userService.Authenticate(request);
-            if (string.IsNullOrEmpty(resultToken))
+            if (string.IsNullOrEmpty(resultToken.ResultObj))
                 return BadRequest("Username or password is incorrect.");
             return Ok(resultToken);
         }
@@ -40,7 +41,7 @@ namespace CTShopSolution.BackendApi.Controllers
                 return BadRequest(ModelState);
 
             var result = await _userService.Register(request);
-            if (!result)
+            if (!result.IsSuccessed)
                 return BadRequest("Register unsuccessful!");
             return Ok();
         }
@@ -53,5 +54,14 @@ namespace CTShopSolution.BackendApi.Controllers
             var userPaging = await _userService.GetUserPaging(request);
             return Ok(userPaging);
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetById(Guid id)
+        {
+            var user = await _userService.GetById(id);
+            return Ok(user);
+        }
+
+
     }
 }

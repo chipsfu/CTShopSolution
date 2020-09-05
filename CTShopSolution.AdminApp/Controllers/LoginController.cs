@@ -41,8 +41,8 @@ namespace CTShopSolution.AdminApp.Controllers
         {
             if (!ModelState.IsValid)
                 return View();
-            var token = await _userApiClient.Authenticate(request);
-            var userPrincipal = this.ValidateToken(token);
+            var result = await _userApiClient.Authenticate(request);
+            var userPrincipal = this.ValidateToken(result.ResultObj);
 
             var authProperties = new AuthenticationProperties
             {
@@ -50,7 +50,7 @@ namespace CTShopSolution.AdminApp.Controllers
                 IsPersistent = false
 
             };
-            HttpContext.Session.SetString("Token", token);
+            HttpContext.Session.SetString("Token", result.ResultObj);
             await HttpContext.SignInAsync(
                 CookieAuthenticationDefaults.AuthenticationScheme,
                 new ClaimsPrincipal(userPrincipal),
@@ -64,13 +64,14 @@ namespace CTShopSolution.AdminApp.Controllers
             IdentityModelEventSource.ShowPII = true;
 
             SecurityToken validatedToken;
-            TokenValidationParameters validationParameters = new TokenValidationParameters();
+            TokenValidationParameters validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
 
-            validationParameters.ValidateLifetime = true;
-
-            validationParameters.ValidAudience = _configuration["Tokens:Issuer"];
-            validationParameters.ValidIssuer = _configuration["Tokens:Issuer"];
-            validationParameters.IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]));
+                ValidAudience = _configuration["Tokens:Issuer"],
+                ValidIssuer = _configuration["Tokens:Issuer"],
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["Tokens:Key"]))
+            };
 
             ClaimsPrincipal principal = new JwtSecurityTokenHandler().ValidateToken(jwtToken, validationParameters, out validatedToken);
 
